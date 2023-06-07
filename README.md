@@ -1,5 +1,5 @@
 # Experiment--05-Implementation-of-flipflops-using-verilog
-### AIM: To implement all the flipflops using verilog and validating their functionality using their functional tables
+## AIM: To implement all the flipflops using verilog and validating their functionality using their functional tables
 ### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
 ### SOFTWARE REQUIRED:   Quartus prime
 ### THEORY 
@@ -101,25 +101,94 @@ From the above characteristic table, we can directly write the next state equati
 Q(t+1)=T′Q(t)+TQ(t)′
 ⇒Q(t+1)=T⊕Q(t)
 
-### Procedure
-/* write all the steps invloved */
+## Procedure
+1.Using NAND gates and wires construct SR Flip-flop
+
+2.Repeat same steps to construct JK, D, T flipflops
+
+3.Find RTL logic and timing diagram for all flipflops
+
+4.End the program
 
 
 
 ### PROGRAM 
-/*
+
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
-*/
 
-
-
-
+Developed by: Arshatha P
+RegisterNumber:  212222230012
+## SR Flip-flop:
+```Py
+module flipflop(S,R,clk,Q,Qbar);
+	input S,R,clk;
+	output reg Q;
+	output reg Qbar;
+	initial Q=0;
+	initial Qbar=1;
+	always @(posedge clk)
+	begin
+	Q=S|((~R)&Q);
+	Qbar=R|((~S)&(Qbar));
+	end
+	endmodule
+```
+## T Flip-flop:
+```py
+module flipflop(T,clk,Q,Qbar);
+input T,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=(T&(~Q))|((~T)&Q);
+Qbar=((~T)&Qbar)|(T&(~Qbar));
+end
+endmodule
+```
+## D Flip-flop:
+```py
+module flipflop(D,clk,Q,Qbar);
+input D,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=D;
+Qbar=~D;
+end
+endmodule
+```
+## JK Flip-flop:
+```py
+module flipflop(J,K,clk,Q,Qbar);
+input J,K,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=(J&(~Q))|((~K)&Q);
+Qbar=((~J)&(Qbar))|K&(~Qbar);
+end
+endmodule
+```
 
 
 ### RTL LOGIC FOR FLIPFLOPS 
-
+## SR Flip-flop:
+![](./01.png)
+## T Flip-flop:
+![](./02.png)
+## D Flip-flop:
+![](./03.png)
+## JK Flip-flop:
+![](./04.png)
 
 
 
@@ -129,6 +198,14 @@ RegisterNumber:
 
 
 ### TIMING DIGRAMS FOR FLIP FLOPS 
+## SR Flip-flop:
+![](./05.png)
+## T Flip-flop:
+![](./06.png)
+## D Flip-flop:
+![](./07.png)
+## JK Flip-flop:
+![](./08.png)
 
 
 
@@ -136,5 +213,5 @@ RegisterNumber:
 
 
 
-
-### RESULTS 
+# RESULTS 
+Thus implementation of flipflops using verilog is verified.
